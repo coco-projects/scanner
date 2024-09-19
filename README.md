@@ -1,11 +1,9 @@
-## Testing
+## usage
 
-``` bash
-composer test
-```
-
-## License
+see examples folder
 
 ---
+
+## License
 
 MIT
