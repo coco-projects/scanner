@@ -5,12 +5,9 @@
     use Coco\scanner\processor\DbProcessor;
     use Coco\scanner\processor\DebugProcessor;
     use Coco\scanner\processor\MoveFileProcessor;
-    use Monolog\Logger;
     use Symfony\Component\Finder\Finder;
 
     require '../vendor/autoload.php';
-
-    $logger = new Logger('my_logger');
 
     $maker = new FilesystemMaker(dirname(__DIR__) . '/runtime/source');
 
@@ -42,6 +39,7 @@
         // 实际使用中,这里可能应该是吧 data 插入到 数据库
         echo $dbManager->table('telegraph_media_source_item')->count();
         echo PHP_EOL;
+
         print_r($files);
         echo PHP_EOL;
         echo PHP_EOL;
@@ -53,11 +51,15 @@
         $finder->depth('< 1')->in($path)->files();
     });
 
-    $scanner = new  LoopScanner($maker, $logger);
+    $scanner = new  LoopScanner($maker);
 
-    $scanner->setDelayMs(100);
+    $scanner->setDelayMs(300);
 
-    $scanner->addStdoutLogger();
-//    $scanner->addFileLogger('test.log');
+    $scanner->setStandardLogger('test');
+
+    $scanner->addStdoutHandler(callback: function(\Monolog\Handler\StreamHandler $handler, LoopScanner $_this) {
+        $handler->setFormatter(new \Coco\logger\MyFormatter());
+    });
+
 
     $scanner->listen();

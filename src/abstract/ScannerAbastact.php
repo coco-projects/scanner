@@ -11,9 +11,8 @@ abstract class ScannerAbastact
 
     public int $delayMs = 100;
 
-    public function __construct(protected MakerAbastact $maker, ?LoggerInterface $logger = null)
+    public function __construct(protected MakerAbastact $maker)
     {
-        $this->setLogger($logger);
         $this->maker->setScanner($this);
     }
 

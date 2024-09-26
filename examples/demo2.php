@@ -8,8 +8,6 @@
 
     require '../vendor/autoload.php';
 
-    $logger = new Logger('my_logger');
-
     $maker = new DbMaker(username: 'root', password: 'root', db: 'ithinkphp_telegraph_test1');
     $maker->addProcessor(new DebugProcessor());
 
@@ -17,11 +15,14 @@
         return $dbManager->table('telegraph_media_source_item')->column('url');
     });
 
-    $scanner = new  LoopScanner($maker, $logger);
+    $scanner = new  LoopScanner($maker);
 
     $scanner->setDelayMs(100);
 
-    $scanner->addStdoutLogger();
-//    $scanner->addFileLogger('test.log');
+    $scanner->setStandardLogger('test');
+
+    $scanner->addStdoutHandler(callback: function(\Monolog\Handler\StreamHandler $handler, LoopScanner $_this) {
+        $handler->setFormatter(new \Coco\logger\MyFormatter());
+    });
 
     $scanner->listen();
