@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccd2165c496a9c8067c9a2e7616e29f9",
+    "content-hash": "1640e1bff62da6bfca840348d1d2c101",
     "packages": [
         {
             "name": "coco-project/logger",
