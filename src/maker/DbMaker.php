@@ -45,7 +45,7 @@ class DbMaker extends MakerAbastact
 
     public function makeMission(): static
     {
-        $this->data = call_user_func_array($this->callback, []);
+        $this->dataResult = call_user_func_array($this->callback, []);
 
         return $this;
     }

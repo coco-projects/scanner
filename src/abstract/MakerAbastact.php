@@ -2,10 +2,16 @@
 
     namespace Coco\scanner\abstract;
 
+use Coco\magicAccess\MagicArrayTrait;
+use Coco\magicAccess\MagicMethod;
+
 abstract class MakerAbastact
 {
+    use MagicArrayTrait;
+    use MagicMethod;
+
     public array              $processors = [];
-    protected mixed           $data;
+    protected mixed           $dataResult;
     protected ScannerAbastact $scanner;
 
     abstract public function makeMission(): static;
@@ -20,9 +26,9 @@ abstract class MakerAbastact
         }
     }
 
-    public function getData(): mixed
+    public function getDataResult(): mixed
     {
-        return $this->data;
+        return $this->dataResult;
     }
 
     public function addProcessor(ProcessorAbastact $processor): void

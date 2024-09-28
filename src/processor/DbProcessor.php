@@ -47,7 +47,7 @@ class DbProcessor extends ProcessorAbastact
 
     public function process(MakerAbastact $maker): bool
     {
-        $data = $maker->getData();
+        $data = $maker->getDataResult();
 
         call_user_func($this->callback, $data);
 

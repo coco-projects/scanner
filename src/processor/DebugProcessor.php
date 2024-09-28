@@ -2,28 +2,17 @@
 
     namespace Coco\scanner\processor;
 
-    use Coco\scanner\abstract\MakerAbastact;
-    use Coco\scanner\abstract\ProcessorAbastact;
-
-class DebugProcessor extends ProcessorAbastact
+class DebugProcessor extends CallbackProcessor
 {
-    public $callback;
-
     public function __construct(?callable $callback = null)
     {
-        $this->callback = $callback;
-    }
+        parent::__construct(function ($data) use ($callback) {
 
-    public function process(MakerAbastact $maker): bool
-    {
-        $data = $maker->getData();
+            if (is_callable($callback)) {
+                $data = call_user_func($callback, $data);
+            }
 
-        if (is_callable($this->callback)) {
-            $data = call_user_func($this->callback, $data);
-        }
-
-        print_r($data);
-
-        return true;
+            print_r($data);
+        });
     }
 }

@@ -16,7 +16,7 @@ class MoveFileProcessor extends ProcessorAbastact
 
     public function process(MakerAbastact $maker): bool
     {
-        $finder = $maker->getData();
+        $finder = $maker->getDataResult();
 
         foreach ($finder as $k => $pathName) {
             $fullSourcePath = $pathName->getRealPath();

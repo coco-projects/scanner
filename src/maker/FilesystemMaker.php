@@ -29,7 +29,7 @@ class FilesystemMaker extends MakerAbastact
 
     public function makeMission(): static
     {
-        $this->data = $this->finder;
+        $this->dataResult = $this->finder;
 
         return $this;
     }
