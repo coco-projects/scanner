@@ -9,6 +9,13 @@
 
     require '../vendor/autoload.php';
 
+    $scanner = new  LoopScanner();
+    $scanner->setDelayMs(800);
+    $scanner->setStandardLogger('test');
+    $scanner->addStdoutHandler(callback: function(\Monolog\Handler\StreamHandler $handler, LoopScanner $_this) {
+        $handler->setFormatter(new \Coco\logger\MyFormatter());
+    });
+
     /*-------------------------------------------*/
     $maker = new FilesystemMaker(dirname(__DIR__) . '/runtime/source');
     $maker->init(function(string $path, Finder $finder) {
@@ -54,11 +61,8 @@
     $maker->addProcessor($processor);
 
     /*-------------------------------------------*/
-    $scanner = new  LoopScanner($maker);
-    $scanner->setDelayMs(800);
-    $scanner->setStandardLogger('test');
-    $scanner->addStdoutHandler(callback: function(\Monolog\Handler\StreamHandler $handler, LoopScanner $_this) {
-        $handler->setFormatter(new \Coco\logger\MyFormatter());
-    });
+
+    $scanner->setMaker($maker);
+
 
     $scanner->listen();
