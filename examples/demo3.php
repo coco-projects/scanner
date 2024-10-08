@@ -29,9 +29,7 @@
     $scanner = new  LoopScanner($maker);
     $scanner->setDelayMs(1000);
     $scanner->setStandardLogger('test');
-    $scanner->addStdoutHandler(callback: function(\Monolog\Handler\StreamHandler $handler, LoopScanner $_this) {
-        $handler->setFormatter(new \Coco\logger\MyFormatter());
-    });
+    $scanner->addStdoutHandler(callback: $scanner::getStandardFormatter());
 
     $scanner->listen();
 

@@ -12,7 +12,7 @@
     $maker->addProcessor(new DebugProcessor());
 
     $maker->init(function(DbManager $dbManager) {
-        return $dbManager->table('telegraph_media_source_item')->column('url');
+        return $dbManager->table('telegraph_media_source_item')->where('id','<',10)->column('url');
     });
 
     $scanner = new  LoopScanner($maker);
@@ -21,8 +21,6 @@
 
     $scanner->setStandardLogger('test');
 
-    $scanner->addStdoutHandler(callback: function(\Monolog\Handler\StreamHandler $handler, LoopScanner $_this) {
-        $handler->setFormatter(new \Coco\logger\MyFormatter());
-    });
+    $scanner->addStdoutHandler(callback: $scanner::getStandardFormatter());
 
     $scanner->listen();

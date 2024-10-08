@@ -12,9 +12,7 @@
     $scanner = new  LoopScanner();
     $scanner->setDelayMs(800);
     $scanner->setStandardLogger('test');
-    $scanner->addStdoutHandler(callback: function(\Monolog\Handler\StreamHandler $handler, LoopScanner $_this) {
-        $handler->setFormatter(new \Coco\logger\MyFormatter());
-    });
+    $scanner->addStdoutHandler(callback: $scanner::getStandardFormatter());
 
     /*-------------------------------------------*/
     $maker = new FilesystemMaker(dirname(__DIR__) . '/runtime/source');
