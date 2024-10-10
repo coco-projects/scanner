@@ -13,6 +13,7 @@
     $scanner->setDelayMs(800);
     $scanner->setStandardLogger('test');
     $scanner->addStdoutHandler(callback: $scanner::getStandardFormatter());
+    $scanner->addRedisHandler();
 
     /*-------------------------------------------*/
     $maker = new FilesystemMaker(dirname(__DIR__) . '/runtime/source');
