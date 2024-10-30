@@ -30,6 +30,7 @@
     $scanner->setDelayMs(1000);
     $scanner->setStandardLogger('test');
     $scanner->addStdoutHandler(callback: $scanner::getStandardFormatter());
+    $scanner->setName('test111');
 
     $scanner->listen();
 
