@@ -28,7 +28,7 @@ class LoopTool
 
     protected function makeLockKey(string $name): string
     {
-        return 'scanner:' . $name;
+        return $name;
     }
 
     public function stop(string $name): void
