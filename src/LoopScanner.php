@@ -10,7 +10,7 @@ class LoopScanner extends ScannerAbastact
     {
         $this->timer->start();
 
-        $this->logInfo('starting loop ...');
+        $this->logInfo('开始监听: '.$this->name);
 
         $times = 1;
 
