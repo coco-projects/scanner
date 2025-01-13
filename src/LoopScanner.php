@@ -19,7 +19,7 @@ class LoopScanner extends ScannerAbastact
             $this->logInfo("[$times]:" . $this->timer->totalTime() . 'S,' . $this->timer->getTotalMemory() . '/' . $this->timer->getTotalMemoryPeak());
 
             $times++;
-            $this->redis->setex($this->makeLockKey(), 5, 1);
+            $this->redis->setex($this->makeLockKey(), $this->expire, 1);
             usleep($this->delayMs * 1000);
         }
 

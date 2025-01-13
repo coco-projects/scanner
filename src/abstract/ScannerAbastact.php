@@ -14,6 +14,7 @@ abstract class ScannerAbastact
     use MagicMethod;
 
     protected int            $delayMs = 100;
+    protected int            $expire ;
     protected string         $name;
     protected Timer          $timer;
     protected ?MakerAbastact $maker   = null;
@@ -60,7 +61,8 @@ abstract class ScannerAbastact
 
     public function listen(): void
     {
-        $this->redis->setex($this->makeLockKey(), 5, 1);
+        $this->expire = (int)($this->delayMs / 1000) + 2;
+        $this->redis->setex($this->makeLockKey(), $this->expire, 1);
         $this->startListen();
     }
 
